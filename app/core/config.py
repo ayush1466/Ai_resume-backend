@@ -18,38 +18,64 @@ class Settings(BaseSettings):
         extra="ignore"
     )
 
+    # ───────────────────────────
     # Application Settings
+    # ───────────────────────────
     APP_NAME: str = "Resume Analyzer API"
     APP_VERSION: str = "1.0.0"
     DEBUG: bool = False
     ENVIRONMENT: str = "production"
 
+    # ───────────────────────────
     # Server Settings
+    # ───────────────────────────
     HOST: str = "0.0.0.0"
     PORT: int = 5000
 
-    # CORS Settings (stored as string, converted to list)
+    # ───────────────────────────
+    # CORS Settings
+    # ───────────────────────────
     ALLOWED_ORIGINS: str = "http://localhost:3000"
 
+    # ───────────────────────────
+    # 🔹 Database Settings (NEW)
+    # ───────────────────────────
+    DATABASE_URL: str = "postgresql://postgres:password@localhost:5432/resume_analyzer_db"
+
+    DB_ECHO: bool = False            # Set True for SQL logs (debug)
+    DB_POOL_SIZE: int = 10
+    DB_MAX_OVERFLOW: int = 20
+
+    # ───────────────────────────
     # 🔹 Groq API Settings
-    GROQ_API_KEY: str = ""  # Loaded from .env
+    # ───────────────────────────
+    GROQ_API_KEY: str = ""
     GROQ_API_BASE: str = "https://api.groq.com/openai/v1"
     GROQ_MODEL: str = "llama3-8b-8192"
     GROQ_MAX_TOKENS: int = 2000
     GROQ_TEMPERATURE: float = 0.7
 
+    # ───────────────────────────
     # File Upload Settings
+    # ───────────────────────────
     MAX_FILE_SIZE_MB: int = 10
     ALLOWED_FILE_TYPES: str = ".pdf"
 
+    # ───────────────────────────
     # Logging
+    # ───────────────────────────
     LOG_LEVEL: str = "INFO"
     LOG_FORMAT: str = "json"
 
+    # ───────────────────────────
     # Rate Limiting
+    # ───────────────────────────
     RATE_LIMIT_ENABLED: bool = False
     RATE_LIMIT_PER_MINUTE: int = 10
 
+    # ───────────────────────────
+    # Computed Properties
+    # ───────────────────────────
     @property
     def allowed_origins_list(self) -> List[str]:
         if isinstance(self.ALLOWED_ORIGINS, str):
