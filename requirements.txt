@@ -7,5 +7,7 @@ python-dotenv==1.0.0
 pydantic>=2.4,<3
 pydantic-settings>=2.0,<3
 httpx==0.25.2
+passlib[bcrypt]==1.7.4
+
 # PDF Generation
 reportlab==4.0.7
