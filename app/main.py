@@ -9,7 +9,7 @@ import time
 from app.core.config import settings
 from app.core.logging import logger, log_request
 from app.core.security import get_cors_middleware_config
-from app.api.routes import health, resume
+from app.api.routes import health, resume, report
 
 # Create FastAPI application
 app = FastAPI(
@@ -68,6 +68,7 @@ async def global_exception_handler(request: Request, exc: Exception):
 # Include routers
 app.include_router(health.router)
 app.include_router(resume.router)
+app.include_router(report.router)  # NEW: PDF Report endpoint
 
 
 # Startup event

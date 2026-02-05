@@ -3,9 +3,25 @@ Standard API response models
 """
 from typing import Any, Optional
 from pydantic import BaseModel
+from pydantic import BaseModel, EmailStr
 
+class UserCreate(BaseModel):
+    name: str
+    email: EmailStr
+    password: str
 
-class SuccessResponse(BaseModel):
+class UserLogin(BaseModel):
+    email: EmailStr
+    password: str
+
+class UserResponse(BaseModel):
+    id: int
+    email: EmailStr
+
+    class Config:
+        from_attributes = True
+
+class SuccessResponse(BaseModel):   
     """Standard success response"""
     success: bool = True
     message: str

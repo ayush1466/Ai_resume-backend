@@ -37,14 +37,6 @@ class Settings(BaseSettings):
     # ───────────────────────────
     ALLOWED_ORIGINS: str = "http://localhost:3000"
 
-    # ───────────────────────────
-    # 🔹 Database Settings (NEW)
-    # ───────────────────────────
-    DATABASE_URL: str = "postgresql://postgres:password@localhost:5432/resume_analyzer_db"
-
-    DB_ECHO: bool = False            # Set True for SQL logs (debug)
-    DB_POOL_SIZE: int = 10
-    DB_MAX_OVERFLOW: int = 20
 
     # ───────────────────────────
     # 🔹 Groq API Settings
