@@ -35,7 +35,7 @@ class Settings(BaseSettings):
     # ───────────────────────────
     # CORS Settings
     # ───────────────────────────
-    ALLOWED_ORIGINS: str = "http://localhost:3000"
+    ALLOWED_ORIGINS: str = ""
 
 
     # ───────────────────────────
