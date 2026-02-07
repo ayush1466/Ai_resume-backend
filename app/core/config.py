@@ -70,7 +70,10 @@ class Settings(BaseSettings):
     # ───────────────────────────
     @property
     def allowed_origins_list(self) -> List[str]:
-     return [origin.strip() for origin in self.ALLOWED_ORIGINS.split(",")]
+        if not self.ALLOWED_ORIGINS:
+         return ["*"]
+        return [origin.strip() for origin in self.ALLOWED_ORIGINS.split(",")]
+
 
     @property
     def allowed_file_types_list(self) -> List[str]:

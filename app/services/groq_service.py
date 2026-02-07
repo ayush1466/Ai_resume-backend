@@ -21,31 +21,33 @@ class GroqService:
         )
         logger.info(f"Groq service initialized with model: {settings.GROQ_MODEL}")
     
-    def _build_analysis_prompt(self, resume_text: str, job_description: str = "") -> str:
-        """
-        Build the prompt for resume analysis
-        
-        Args:
-            resume_text: Extracted resume text
-            job_description: Optional job description
-            
-        Returns:
-            Formatted prompt
-        """
-        prompt = f"""
+def _build_analysis_prompt(self, resume_text: str, job_description: str = "") -> str:
+    """
+    Build the prompt for resume analysis
+    """
+
+    job_section = ""
+    keyword_note = ""
+    alignment_note = ""
+
+    if job_description:
+        job_section = f"\nJob Description:\n{job_description}"
+        keyword_note = " from the job description"
+        alignment_note = "- Alignment with the provided job description"
+
+    prompt = f"""
 Analyze the following resume and provide detailed feedback in JSON format.
 
 Resume:
 {resume_text}
-
-{f"Job Description:\n{job_description}" if job_description else ""}
+{job_section}
 
 Provide your analysis in the following JSON structure (IMPORTANT: Return ONLY valid JSON, no markdown, no explanations):
 {{
     "atsScore": <number between 0-100>,
     "strengths": [<array of 3-5 key strengths as strings>],
     "improvements": [<array of 3-5 areas to improve as strings>],
-    "missingKeywords": [<array of 3-5 important missing keywords as strings{" from the job description" if job_description else ""}>],
+    "missingKeywords": [<array of 3-5 important missing keywords as strings{keyword_note}>],
     "suggestions": [<array of 3-5 actionable suggestions as strings>]
 }}
 
@@ -55,11 +57,12 @@ Focus on:
 - Content quality and impact
 - Achievement quantification
 - Professional presentation
-{f"- Alignment with the provided job description" if job_description else ""}
+{alignment_note}
 
 CRITICAL: Return ONLY the JSON object. No markdown code blocks, no explanations, just pure JSON.
 """
-        return prompt
+    return prompt
+
     
     async def analyze_resume(
         self,
