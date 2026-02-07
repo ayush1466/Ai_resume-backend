@@ -35,7 +35,10 @@ class Settings(BaseSettings):
     # ───────────────────────────
     # CORS Settings
     # ───────────────────────────
-    ALLOWED_ORIGINS: str = "http://localhost:3000"
+    ALLOWED_ORIGINS: list = [
+        "http://localhost:3000",
+        # "https://your-project.vercel.app"
+    ]
 
 
     # ───────────────────────────
