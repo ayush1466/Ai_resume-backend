@@ -35,10 +35,7 @@ class Settings(BaseSettings):
     # ───────────────────────────
     # CORS Settings
     # ───────────────────────────
-    ALLOWED_ORIGINS: list = [
-        "http://localhost:3000",
-        # "https://your-project.vercel.app"
-    ]
+    ALLOWED_ORIGINS: str = "http://localhost:3000"
 
 
     # ───────────────────────────
@@ -73,9 +70,7 @@ class Settings(BaseSettings):
     # ───────────────────────────
     @property
     def allowed_origins_list(self) -> List[str]:
-        if isinstance(self.ALLOWED_ORIGINS, str):
-            return [origin.strip() for origin in self.ALLOWED_ORIGINS.split(",")]
-        return [self.ALLOWED_ORIGINS]
+     return [origin.strip() for origin in self.ALLOWED_ORIGINS.split(",")]
 
     @property
     def allowed_file_types_list(self) -> List[str]:
